@@ -1,4 +1,6 @@
 {
   "news": "News",
-  "hi": "Hi"
+  "main": "Main",
+  "profile": "Profile",
+  "login": "Login"
 }

@@ -11,11 +11,8 @@ function App() {
 
   FetchData()
 
-  console.log(data)
-
   return (
     <div className="App">
-      <h1>{t("hi")}</h1>
       <Header/>
     </div>
   );
