@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface IPosts {
+export interface IPosts {
   posts: {
     userId?: number,
     id?: number,

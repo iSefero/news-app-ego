@@ -1,29 +1,26 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
+// MUI
+import { Divider, Button, Stack } from "@mui/material";
+
+// i18n
 import { useTranslation } from 'react-i18next';
-import {Divider, Stack} from "@mui/material";
 
 
 export function ChangeLangButton() {
   const { i18n } = useTranslation();
-  const [ lang, setLang] = React.useState("en")
 
-  React.useEffect(() => {
-    i18n.changeLanguage("en")
-  },[])
-
-  const changeLanguage = (lang: string) => {
+  const changeLanguage = ( lang: string ) => {
     i18n.changeLanguage(lang)
-    setLang(lang)
   }
+
+  const selectedLang = ( item: string ) => i18n.language === item ? "black" : "inherit";
 
   return (
      <Stack  display="flex" >
-       <Button sx={{fontSize: "10px", color: lang === "en" ? "black" :"inherit"}}  onClick={() => changeLanguage("en")}>
+       <Button sx={{ fontSize: "10px", color: selectedLang("en") }}  onClick={() => changeLanguage("en")}>
          En
        </Button>
-       <Divider color="white" />
-       <Button sx={{fontSize: "10px", color: lang === "uk" ? "black" :"inherit"}}  onClick={() => changeLanguage("uk")}>
+       <Divider variant="middle" color="white" />
+       <Button sx={{ fontSize: "10px", color: selectedLang("uk") }}  onClick={() => changeLanguage("uk")}>
          Укр
        </Button>
      </Stack>

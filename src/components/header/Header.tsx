@@ -1,50 +1,86 @@
+// React
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { useTranslation } from 'react-i18next';
-import {ChangeLangButton} from "../changeLangButton/ChangeLangButton";
+import { Link, useLocation } from 'react-router-dom';
 
+// MUI
+import { AppBar, Box, Toolbar, Typography, Button } from '@mui/material';
+
+// i18n
+import { useTranslation } from 'react-i18next';
+
+// Common
+import { ChangeLangButton } from "../changeLangButton/ChangeLangButton";
+import { AppContext } from "../../App";
+import { Authorization } from "../authorization/Authorization";
 
 
 export function Header() {
-  const { t, i18n } = useTranslation();
+  const { handleOpen, handleClearStorage } = React.useContext(AppContext);
+  const [ clearStorage, setClearStorage ] = React.useState(true);
+
+  const { t } = useTranslation();
+  const location = useLocation();
 
   const pages = [
     {
-    name: t("main")
+      link: "/",
+      name: t("titles.main"),
     },
     {
-    name: t("profile")
+      link: "/profile",
+      name: t("titles.profile"),
     },
     {
-    name: t("news")
+      link: "/news",
+      name: t("titles.news"),
     }
   ];
 
-  const renderPages = pages.map((item, index) => (<Typography key={index} variant="h6" component="div">
-      {item.name}
-    </Typography>))
+  const [ selectedItem, setSelectedItem ] = React.useState(pages.find((page) => page.link === location.pathname)?.link || "");
 
+  const handleSelected = ( link: string ) => {
+    setSelectedItem(link);
+  };
+
+  const renderPages = pages.map((item, index) => (
+    <Link
+      key={index}
+      to={item.link}
+      style={{textDecoration: "none", color: selectedItem === item.link ? "black" : "inherit"}}
+      onClick={() => handleSelected(item.link)}
+    >
+      <Typography variant="h5" component="div">
+        {item.name}
+      </Typography>
+    </Link>
+  ));
+
+  // Display either the login button or the logout button
+  const loginButton = () => {
+  const loggedIn = localStorage.getItem("loggedIn") !== "true";
+
+  return (
+  <Button onClick={loggedIn ? handleOpen : () => {handleClearStorage(); setClearStorage(!clearStorage)}}
+          sx={{fontSize: "20px"}} color="inherit">{t(loggedIn ? "buttons.login" : "buttons.logout")}</Button>
+  )
+};
 
   return (
     <div>
-      <Box >
-      <AppBar position="static">
+      <Box>
+        <AppBar position="static">
           <Toolbar sx={{ justifyContent: "space-between" }}>
-            <Box sx={{display: "flex", gap: "30px"}}>
+            <Box sx={{ display: "flex", gap: "30px" }}>
               {renderPages}
             </Box>
-            <Box sx={{display: "flex", gap: "15px"}}>
-              <Button sx={{fontSize: "20px"}} color="inherit">{t("login")}</Button>
-              <ChangeLangButton/>
+            <Box sx={{ display: "flex", gap: "15px" }}>
+              {loginButton()}
+              <ChangeLangButton />
             </Box>
           </Toolbar>
-      </AppBar>
+        </AppBar>
       </Box>
+      <Authorization/>
     </div>
   );
 }
-

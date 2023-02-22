@@ -1,6 +1,26 @@
 {
-  "news": "News",
-  "main": "Main",
-  "profile": "Profile",
-  "login": "Login"
+  "buttons": {
+    "login": "Login",
+    "showMore": "Show more",
+    "signin": "Sign in",
+    "deleteNews": "Delete news",
+    "logout": "Logout"
+  },
+  "titles": {
+    "news": "News",
+    "main": "Main",
+    "title": "Title:",
+    "profile": "Profile"
+  },
+  "phrases": {
+    "redirecting": "You are not logged in, please log in to your profile.",
+    "redirectingTimer": "You will be redirected to the main page via...",
+    "smile": "Smile 😁"
+  },
+  "placeholders": {
+    "yourUsername": "Your login",
+    "yourPassword": "Your password",
+    "password": "Password",
+    "login": "Login"
+  }
 }
