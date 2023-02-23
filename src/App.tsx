@@ -1,6 +1,6 @@
 // React
 import React from 'react';
-import { Route, Routes } from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 
 // Common
 import { useAppDispatch } from "./redux/store";
@@ -24,19 +24,22 @@ export const AppContext = React.createContext<AppContextType>({} as AppContextTy
 
 function App() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate()
 
   const [ open, setOpen ] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleClearStorage = () => {
     localStorage.clear();
+    if (window.location.pathname === "/profile")
+      return navigate("/");
   }
 
   React.useEffect(() => {
     async function fetchData() {
       try {
-        await axios.get('https://jsonplaceholder.typicode.com/posts')
-          .then(response => dispatch(setPosts(response.data)))
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+        dispatch(setPosts(response.data))
       } catch (error) {
         alert("Помилка під час запиту даних")
       }
@@ -55,11 +58,12 @@ function App() {
   return (
     <div style={{ background: "#d5d1d1", height: "100%", minHeight: "100vh" }}>
       <AppContext.Provider value={value}>
-        <Routes>
-          <Route path="/" element={<Main/>}/>
-          <Route path="/news" element={<News/>}/>
-          <Route path="/profile" element={<Profile/>}/>
-        </Routes>
+          <Routes>
+            <Route path="" element={<Main/>}/>
+            <Route path="/news" element={<News/>}/>
+            <Route path="/profile" element={<Profile/>}/>
+            <Route path="*" element={<Main/>}/>
+          </Routes>
       </AppContext.Provider>
     </div>
   );

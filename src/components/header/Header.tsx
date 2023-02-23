@@ -1,6 +1,6 @@
 // React
 import * as React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // MUI
 import { AppBar, Box, Toolbar, Typography, Button } from '@mui/material';
@@ -19,7 +19,6 @@ export function Header() {
   const [ clearStorage, setClearStorage ] = React.useState(true);
 
   const { t } = useTranslation();
-  const location = useLocation();
 
   const pages = [
     {
@@ -36,7 +35,7 @@ export function Header() {
     }
   ];
 
-  const [ selectedItem, setSelectedItem ] = React.useState(pages.find((page) => page.link === location.pathname)?.link || "");
+  const [ selectedItem, setSelectedItem ] = React.useState(pages.find((page) => page.link === window.location.pathname)?.link || "");
 
   const handleSelected = ( link: string ) => {
     setSelectedItem(link);
