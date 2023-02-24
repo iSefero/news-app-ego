@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // MUI
 import { AppBar, Box, Toolbar, Typography, Button } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 // i18n
 import { useTranslation } from 'react-i18next';
@@ -14,8 +15,9 @@ import { AppContext } from "../../App";
 import { Authorization } from "../authorization/Authorization";
 
 
-export function Header() {
-  const { handleOpen, handleClearStorage } = React.useContext(AppContext);
+export function Header(): React.ReactElement {
+  const loggedIn = localStorage.getItem("person") === null;
+  const { toggleMenu, handleClearStorage } = React.useContext(AppContext);
   const [ clearStorage, setClearStorage ] = React.useState(true);
 
   const { t } = useTranslation();
@@ -54,15 +56,23 @@ export function Header() {
     </Link>
   ));
 
-  // Display either the login button or the logout button
-  const loginButton = () => {
-  const loggedIn = localStorage.getItem("loggedIn") !== "true";
+  const handleLogIn = (): void => {
+    if (loggedIn) return toggleMenu();
 
-  return (
-  <Button onClick={loggedIn ? handleOpen : () => {handleClearStorage(); setClearStorage(!clearStorage)}}
-          sx={{fontSize: "20px"}} color="inherit">{t(loggedIn ? "buttons.login" : "buttons.logout")}</Button>
-  )
-};
+    handleClearStorage();
+    // This action tells the component that the localStorage is cleared and it should display another UI
+    setClearStorage(!clearStorage)
+  };
+
+  // Display either the login button or the logout button
+  const loginButton = (): JSX.Element => {
+    return (
+      <Button onClick={handleLogIn} sx={{ fontSize: "20px", gap: "10px" }} color="inherit">
+        {!loggedIn && <AccountCircleIcon/>}
+        {t(loggedIn ? "buttons.login" : "buttons.logout")}
+      </Button>
+    )
+  };
 
   return (
     <div>

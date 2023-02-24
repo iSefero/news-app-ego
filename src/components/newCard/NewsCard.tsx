@@ -1,3 +1,6 @@
+// React
+import React from "react";
+
 // MUI
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@mui/material';
 
@@ -9,10 +12,10 @@ interface IPosts {
   id?: number,
   title?: string,
   body?: string,
-  deleteItem: (arg?: number) => void
+  deleteItem: (id?: number) => void
 }
 
-export default function NewsCard(props: IPosts) {
+export default function NewsCard(props: IPosts): React.ReactElement {
   const { t } = useTranslation();
 
   return (

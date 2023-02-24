@@ -13,8 +13,7 @@ import { Profile } from "./pages/profile/Profile";
 import axios from "axios"
 
 interface AppContextType {
-  handleOpen: () => void;
-  handleClose: () => void;
+  toggleMenu: () => void;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   open: boolean;
   handleClearStorage: () => void;
@@ -22,20 +21,22 @@ interface AppContextType {
 
 export const AppContext = React.createContext<AppContextType>({} as AppContextType);
 
-function App() {
+function App(): React.ReactElement {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [ open, setOpen ] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const handleClearStorage = () => {
+  const toggleMenu = (): void => {
+    setOpen(prev => !prev)
+  };
+
+  const handleClearStorage = (): void => {
     localStorage.clear();
     if (window.location.pathname === "/profile")
       return navigate("/");
-  }
+  };
 
-  React.useEffect(() => {
+  React.useEffect((): void => {
     async function fetchData() {
       try {
         const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -47,9 +48,8 @@ function App() {
     fetchData()
   }, [])
 
-  const value = {
-    handleOpen,
-    handleClose,
+  const providerData = {
+    toggleMenu,
     setOpen,
     open,
     handleClearStorage,
@@ -57,7 +57,7 @@ function App() {
 
   return (
     <div style={{ background: "#d5d1d1", height: "100%", minHeight: "100vh" }}>
-      <AppContext.Provider value={value}>
+      <AppContext.Provider value={providerData}>
           <Routes>
             <Route path="" element={<Main/>}/>
             <Route path="/news" element={<News/>}/>

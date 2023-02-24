@@ -15,7 +15,8 @@
   "phrases": {
     "redirecting": "You are not logged in, please log in to your profile.",
     "redirectingTimer": "You will be redirected to the main page via...",
-    "smile": "Smile 😁"
+    "smile": "Smile",
+    "hi": "Hi, how are you?"
   },
   "placeholders": {
     "yourUsername": "Your login",

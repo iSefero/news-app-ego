@@ -1,3 +1,6 @@
+// React
+import React from "react";
+
 // MUI
 import { Divider, Button, Stack } from "@mui/material";
 
@@ -5,14 +8,14 @@ import { Divider, Button, Stack } from "@mui/material";
 import { useTranslation } from 'react-i18next';
 
 
-export function ChangeLangButton() {
+export function ChangeLangButton(): React.ReactElement {
   const { i18n } = useTranslation();
 
-  const changeLanguage = ( lang: string ) => {
+  const changeLanguage = ( lang: string ): void => {
     i18n.changeLanguage(lang)
   }
 
-  const selectedLang = ( item: string ) => i18n.language === item ? "black" : "inherit";
+  const selectedLang = ( item: string ): string => i18n.language === item ? "black" : "inherit";
 
   return (
      <Stack  display="flex" >

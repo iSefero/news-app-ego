@@ -11,10 +11,10 @@ export interface IPosts {
 
 const initialState: IPosts = {
   posts: [{
-    userId: undefined,
-    id: undefined,
-    title: undefined,
-    body: undefined,
+    userId: 0,
+    id: 0,
+    title: "",
+    body: "",
   }]
 };
 

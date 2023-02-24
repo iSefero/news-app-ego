@@ -8,14 +8,15 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 // i18n
 import { useTranslation } from "react-i18next";
 
+type ClearTimer = () => void;
 
-export const NonAuthCard = () => {
+export const NonAuthCard = (): React.ReactElement => {
   const { t } = useTranslation();
   const [ time, setTime ] = React.useState(5);
   const navigate = useNavigate();
 
   // Countdown and homepage jump
-  React.useEffect(() => {
+  React.useEffect((): ClearTimer => {
     const intervalId = setInterval(() => {
       setTime((prevTime) => prevTime - 1);
     }, 1000);

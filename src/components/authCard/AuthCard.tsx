@@ -1,5 +1,5 @@
 // React
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as React from "react";
 
 // MUI
@@ -12,22 +12,22 @@ import { useTranslation } from "react-i18next";
 import { AppContext } from "../../App";
 
 
-export const AuthCard = () => {
+export const AuthCard = (): React.ReactElement => {
   const { t } = useTranslation();
   const { handleClearStorage } = React.useContext(AppContext);
 
-  const username = localStorage.getItem("username");
-  const password = localStorage.getItem("password");
+  const personString = localStorage.getItem("person");
+  const user = personString ? JSON.parse(personString) : null;
 
   return (
     <div >
       <Card sx={{ display: "inline-block" }}>
-        <CardContent>
+        <CardContent sx={{gap: "10px", display: "flex", flexDirection: "column"}}>
           <Typography>
-            {t("placeholders.yourUsername")}: {username}
+            {t("placeholders.yourUsername")}: {user.username}
           </Typography>
           <Typography>
-            {t("placeholders.yourPassword")}: {password}
+            {t("phrases.hi")}
           </Typography>
         </CardContent>
         <CardActions sx={{justifyContent: "center"}}>

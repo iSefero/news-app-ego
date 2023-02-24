@@ -8,34 +8,41 @@ import { Button, TextField, Box, Modal} from '@mui/material';
 import { useTranslation } from "react-i18next";
 
 // Common
-import { style } from './AuthorizationStyle';
 import { AppContext } from "../../App";
 
+export const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    padding: 4,
+};
 
-export function Authorization() {
+
+export function Authorization(): React.ReactElement {
   const { t } = useTranslation();
-  const { open, handleClose } = React.useContext(AppContext);
+  const { open, toggleMenu } = React.useContext(AppContext);
 
-  const [ username, setUsername ] = React.useState('');
-  const [ password, setPassword ] = React.useState('');
+  const [ account, setAccount ] = React.useState({username: "", password: ""});
 
-  const handleUsernameChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
-    setUsername(event.target.value);
+  const handleUsernameChange = ( event: React.ChangeEvent<HTMLInputElement> ): void => {
+    setAccount({...account, username:event.target.value});
   };
 
-  const handlePasswordChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
-    setPassword(event.target.value);
+  const handlePasswordChange = ( event: React.ChangeEvent<HTMLInputElement> ): void => {
+    setAccount({...account, password: event.target.value});
   };
 
   // Authorizing and writing user data to localStorage
-  const handleSubmit = ( event: React.FormEvent<HTMLFormElement> ) => {
+  const handleSubmit = ( event: React.FormEvent<HTMLFormElement> ): void => {
     event.preventDefault();
 
-    if (username === 'admin' && password === '12345') {
-      localStorage.setItem('loggedIn', 'true');
-      localStorage.setItem('username', username);
-      localStorage.setItem('password', password);
-      handleClose();
+    if (account.username === 'admin' && account.password === '12345') {
+      localStorage.setItem('person', JSON.stringify(account));
+      toggleMenu();
     } else {
       alert('Неправильне ім\'я користувача або пароль');
     }
@@ -45,11 +52,11 @@ export function Authorization() {
     <div>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={toggleMenu}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style.modalWrapper}>
+        <Box sx={style} >
           <form onSubmit={handleSubmit}>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               <Box>
@@ -59,7 +66,7 @@ export function Authorization() {
                   type="text"
                   id="username"
                   name="username"
-                  value={username}
+                  value={account.username}
                   onChange={handleUsernameChange}
                 />
               </Box>
@@ -70,7 +77,7 @@ export function Authorization() {
                   type="password"
                   id="password"
                   name="password"
-                  value={password}
+                  value={account.password}
                   onChange={handlePasswordChange}
                 />
               </Box>

@@ -1,12 +1,15 @@
+// React
+import React from "react"
+
 // Common
 import {Header} from "../../components/header/Header";
 import {AuthCard} from "../../components/authCard/AuthCard";
 import {NonAuthCard} from "../../components/nonAuthCard/NonAuthCard";
 
 
-export const Profile = () => {
+export const Profile = (): React.ReactElement => {
   // Display different pages depending on whether the user is logged in or not
-  const showProfile = localStorage.getItem("loggedIn") === "true"
+  const showProfile = localStorage.getItem("person") !== null
     ?
     <AuthCard/>
     :

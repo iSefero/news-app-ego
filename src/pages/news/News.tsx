@@ -12,30 +12,30 @@ import { Header } from "../../components/header/Header";
 import { useAppSelector } from "../../redux/store";
 
 interface IDeleteItem {
-  (arg?: number): void
+  (id?: number): void
 }
 
 const LazyNewsCard = React.lazy(() => import("../../components/newCard/NewsCard"));
 
-export const News = () => {
+export const News = (): React.ReactElement => {
   const { posts } = useAppSelector((state) => state.data);
   const [ visiblePosts, setVisiblePosts ] = React.useState(posts.slice(0, 5));
 
   // Prevent rendering of empty objects
-  React.useEffect(() => {
+  React.useEffect((): void => {
     if (posts.length > 0) {
       setVisiblePosts(posts.slice(0, 5));
     }
   }, [posts]);
 
   // When you click, it shows the new 5 objects from the array
-  function handleShowMore() {
+  function handleShowMore(): void {
     const nextIndex = visiblePosts.length + 5;
     setVisiblePosts(posts.slice(0, nextIndex));
   }
 
   // Deletes the selected news
-  const handleDelete = ( id: number ) => {
+  const handleDelete = ( id: number ): void => {
     const index = visiblePosts.findIndex((object) => object.id === id);
     if (index !== -1) {
       setVisiblePosts([...visiblePosts.slice(0, index), ...visiblePosts.slice(index + 1)]);
