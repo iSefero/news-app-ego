@@ -3,14 +3,10 @@ import React from 'react';
 import {Route, Routes, useNavigate} from "react-router-dom";
 
 // Common
-import { useAppDispatch } from "./redux/store";
-import { setPosts } from "./redux/slices/dataSlice";
 import { Main } from "./pages/main/Main";
 import { News } from "./pages/news/News";
 import { Profile } from "./pages/profile/Profile";
 
-// Axios
-import axios from "axios"
 
 interface AppContextType {
   toggleMenu: () => void;
@@ -22,10 +18,9 @@ interface AppContextType {
 export const AppContext = React.createContext<AppContextType>({} as AppContextType);
 
 function App(): React.ReactElement {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [ open, setOpen ] = React.useState(false);
+  const [ open, setOpen ] = React.useState<boolean>(false);
   const toggleMenu = (): void => {
     setOpen(prev => !prev)
   };
@@ -35,18 +30,6 @@ function App(): React.ReactElement {
     if (window.location.pathname === "/profile")
       return navigate("/");
   };
-
-  React.useEffect((): void => {
-    async function fetchData() {
-      try {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-        dispatch(setPosts(response.data))
-      } catch (error) {
-        alert("Помилка під час запиту даних")
-      }
-    }
-    fetchData()
-  }, [])
 
   const providerData = {
     toggleMenu,

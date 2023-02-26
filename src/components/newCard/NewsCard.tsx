@@ -21,13 +21,18 @@ export default function NewsCard(props: IPosts): React.ReactElement {
   return (
     <Card key={props.id} sx={{ gap: "30px", display: "flex" }}>
       <CardContent>
-        <Box sx={{ display: "flex", alignItems: "baseline" }}>
-          <Typography sx={{ fontSize: 16 }} >
-            {t("titles.title")}
-          </Typography>
-          <Typography sx={{ paddingLeft: "7px", fontSize: 14 }} color="text.secondary" gutterBottom>
-            {props.title}
-          </Typography>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+          <Box sx={{display: "flex", alignItems: "baseline"}}>
+            <Typography sx={{ fontSize: 16 }} >
+              {t("titles.title")}
+            </Typography>
+            <Typography sx={{ paddingLeft: "7px", fontSize: 14 }} color="text.secondary" gutterBottom>
+              {props.title}
+            </Typography>
+          </Box>
+          <CardActions sx={{ alignItems: "flex-start" }} >
+            <Button variant="outlined" sx={{display: "inline-block"}} onClick={() => props.deleteItem?.(props.id)} size="small">{t("buttons.deleteNews")}</Button>
+          </CardActions>
         </Box>
         <Typography variant="body2">
           {props.body},
@@ -36,9 +41,6 @@ export default function NewsCard(props: IPosts): React.ReactElement {
           {props.body}.
         </Typography>
       </CardContent>
-      <CardActions sx={{ alignItems: "flex-start" }} >
-        <Button variant="outlined" onClick={() => props.deleteItem?.(props.id)} size="small">{t("buttons.deleteNews")}</Button>
-      </CardActions>
     </Card>
   );
 }

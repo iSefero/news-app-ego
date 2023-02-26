@@ -18,7 +18,7 @@ import { Authorization } from "../authorization/Authorization";
 export function Header(): React.ReactElement {
   const loggedIn = localStorage.getItem("person") === null;
   const { toggleMenu, handleClearStorage } = React.useContext(AppContext);
-  const [ clearStorage, setClearStorage ] = React.useState(true);
+  const [ clearStorage, setClearStorage ] = React.useState<boolean>(true);
 
   const { t } = useTranslation();
 
@@ -37,7 +37,7 @@ export function Header(): React.ReactElement {
     }
   ];
 
-  const [ selectedItem, setSelectedItem ] = React.useState(pages.find((page) => page.link === window.location.pathname)?.link || "");
+  const [ selectedItem, setSelectedItem ] = React.useState<string>(pages.find((page) => page.link === window.location.pathname)?.link || "");
 
   const handleSelected = ( link: string ) => {
     setSelectedItem(link);

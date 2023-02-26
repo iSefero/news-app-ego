@@ -12,7 +12,7 @@ type ClearTimer = () => void;
 
 export const NonAuthCard = (): React.ReactElement => {
   const { t } = useTranslation();
-  const [ time, setTime ] = React.useState(5);
+  const [ time, setTime ] = React.useState<number>(5);
   const navigate = useNavigate();
 
   // Countdown and homepage jump
