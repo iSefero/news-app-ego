@@ -66,7 +66,7 @@ export const News = (): React.ReactElement => {
     visiblePosts.length > 1 ? (
       <Box sx={style.newsCard}>
         {visiblePosts.map((object) => (
-            <NewsCard deleteItem={handleDelete as IDeleteItem} {...object} />
+            <NewsCard key={object.id} deleteItem={handleDelete as IDeleteItem} {...object} />
         ))}
       </Box>
     ) : (

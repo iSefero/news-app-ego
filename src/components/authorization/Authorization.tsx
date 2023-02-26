@@ -21,12 +21,17 @@ export const style = {
     padding: 4,
 };
 
+interface ILocalStorageData {
+  username: string,
+  password: string
+}
+
 
 export function Authorization(): React.ReactElement {
   const { t } = useTranslation();
   const { open, toggleMenu } = React.useContext(AppContext);
 
-  const [ account, setAccount ] = React.useState({username: "", password: ""});
+  const [ account, setAccount ] = React.useState<ILocalStorageData>({username: "", password: ""});
 
   const handleUsernameChange = ( event: React.ChangeEvent<HTMLInputElement> ): void => {
     setAccount({...account, username:event.target.value});
