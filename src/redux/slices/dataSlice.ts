@@ -1,22 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {IPost} from "../../types/types";
 
 export interface IPosts {
-  posts: {
-    userId?: number,
-    id?: number,
-    title?: string,
-    body?: string,
-  }[],
+  posts: IPost[],
   isLoading: boolean,
   isAllDataLoaded: boolean
 }
 
 const initialState: IPosts = {
   posts: [{
-    userId: 0,
-    id: 0,
+    author: "",
+    content: "",
+    description: "",
+    publishedAt: "",
+    source: {
+      id: "",
+      name: "",
+    },
     title: "",
-    body: "",
+    url: "",
+    urlToImage: "",
+
   }],
   isLoading: true,
   isAllDataLoaded: false

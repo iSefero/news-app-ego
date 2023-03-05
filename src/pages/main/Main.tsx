@@ -1,31 +1,36 @@
 // React
 import React from "react"
 
-// i18n
-import { useTranslation } from "react-i18next";
-
 // Common
 import { Header } from "../../components/header/Header";
-
-const styles: React.CSSProperties = {
-  margin: "0",
-  position: "absolute",
-  top: "50%",
-  textAlign: "center",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  fontSize: "100px"
-};
+import { Box, Divider, Typography } from "@mui/material";
+import ukraine from "../../assets/image/map.jpg"
+import { styles } from "./MainStyle";
 
 
-export const Main = (): React.ReactElement => {
-  const { t } = useTranslation();
+export const Main: React.FC = () => {
+  const dateNow = new Date();
+  const day = dateNow.getDate();
+  const month = dateNow.toLocaleString('default', { month: 'long' });
+  const year = dateNow.getFullYear();
 
   return (
-    <div >
+    <div>
       <Header/>
-      <div>
-        <h1 style={styles}>{t("phrases.smile")}😁</h1>
+      <div style={styles.content}>
+        <Box sx={styles.newsPaperName}>
+          <div style={styles.emptyBlock}></div>
+          <Typography variant="h1" fontWeight="bold">
+            The Ukrainian news
+          </Typography>
+          <Typography style={styles.date} variant="h6" >
+            {day} {month} {year}
+          </Typography>
+        </Box>
+        <Divider variant="middle"/>
+        <Box style={styles.imageBlock}>
+          <img style={styles.image} alt="error" src={ukraine}/>
+        </Box>
       </div>
     </div>
   )

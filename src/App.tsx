@@ -1,11 +1,12 @@
 // React
 import React from 'react';
-import {Route, Routes, useNavigate} from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 // Common
 import { Main } from "./pages/main/Main";
 import { News } from "./pages/news/News";
 import { Profile } from "./pages/profile/Profile";
+import { styles } from './styles/AppStyles';
 
 
 interface AppContextType {
@@ -17,7 +18,7 @@ interface AppContextType {
 
 export const AppContext = React.createContext<AppContextType>({} as AppContextType);
 
-function App(): React.ReactElement {
+const App: React.FC = () => {
   const navigate = useNavigate();
 
   const [ open, setOpen ] = React.useState<boolean>(false);
@@ -39,7 +40,7 @@ function App(): React.ReactElement {
   };
 
   return (
-    <div style={{ background: "#d5d1d1", height: "100%", minHeight: "100vh" }}>
+    <div style={styles}>
       <AppContext.Provider value={providerData}>
           <Routes>
             <Route path="" element={<Main/>}/>

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 // MUI
-import { AppBar, Box, Toolbar, Typography, Button } from '@mui/material';
+import {AppBar, Box, Toolbar, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 // i18n
@@ -13,9 +13,11 @@ import { useTranslation } from 'react-i18next';
 import { ChangeLangButton } from "../changeLangButton/ChangeLangButton";
 import { AppContext } from "../../App";
 import { Authorization } from "../authorization/Authorization";
+import flag from "../../assets/image/flag.png"
+import { ImprovedButton } from "../Button/Button";
+import { linkPagesStyle, styles } from './HeaderStyle';
 
-
-export function Header(): React.ReactElement {
+export const Header: React.FC = () => {
   const loggedIn = localStorage.getItem("person") === null;
   const { toggleMenu, handleClearStorage } = React.useContext(AppContext);
   const [ clearStorage, setClearStorage ] = React.useState<boolean>(true);
@@ -24,7 +26,7 @@ export function Header(): React.ReactElement {
 
   const pages = [
     {
-      link: "/",
+      link: "/" || "",
       name: t("titles.main"),
     },
     {
@@ -47,10 +49,10 @@ export function Header(): React.ReactElement {
     <Link
       key={index}
       to={item.link}
-      style={{textDecoration: "none", color: selectedItem === item.link ? "black" : "inherit"}}
+      style={linkPagesStyle(selectedItem, item.link)}
       onClick={() => handleSelected(item.link)}
     >
-      <Typography variant="h5" component="div">
+      <Typography variant="h4" component="div">
         {item.name}
       </Typography>
     </Link>
@@ -67,22 +69,25 @@ export function Header(): React.ReactElement {
   // Display either the login button or the logout button
   const loginButton = (): JSX.Element => {
     return (
-      <Button onClick={handleLogIn} sx={{ fontSize: "20px", gap: "10px" }} color="inherit">
-        {!loggedIn && <AccountCircleIcon/>}
-        {t(loggedIn ? "buttons.login" : "buttons.logout")}
-      </Button>
+      <ImprovedButton
+        onClick={handleLogIn}
+        text={[!loggedIn && <AccountCircleIcon/> , t(loggedIn ? "buttons.login" : "buttons.logout")]}
+      />
     )
   };
 
   return (
     <div>
       <Box>
-        <AppBar position="static">
-          <Toolbar sx={{ justifyContent: "space-between" }}>
-            <Box sx={{ display: "flex", gap: "30px" }}>
-              {renderPages}
+        <AppBar sx={styles.wrapper}>
+          <Toolbar sx={styles.content}>
+            <Box sx={styles.leftSide}>
+              <img style={styles.logo} alt="error" src={flag}/>
+              <Box sx={styles.pages}>
+                {renderPages}
+              </Box>
             </Box>
-            <Box sx={{ display: "flex", gap: "15px" }}>
+            <Box sx={styles.rightSide}>
               {loginButton()}
               <ChangeLangButton />
             </Box>

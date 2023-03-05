@@ -17,7 +17,9 @@
     "redirectingTimer": "You will be redirected to the main page via...",
     "smile": "Smile",
     "hi": "Hi, how are you?",
-    "noMore": "That's all the news"
+    "noMore": "That's all the news",
+    "published": "Published:"
+
   },
   "placeholders": {
     "yourUsername": "Your login",

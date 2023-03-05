@@ -2,13 +2,15 @@
 import React from "react";
 
 // MUI
-import { Divider, Button, Stack } from "@mui/material";
+import { Divider, Stack } from "@mui/material";
 
 // i18n
 import { useTranslation } from 'react-i18next';
+import { ImprovedButton } from "../Button/Button";
+import { styles } from "./ChangeLangButtonStyle";
 
 
-export function ChangeLangButton(): React.ReactElement {
+export const ChangeLangButton: React.FC = () => {
   const { i18n } = useTranslation();
 
   const changeLanguage = ( lang: string ): void => {
@@ -19,13 +21,15 @@ export function ChangeLangButton(): React.ReactElement {
 
   return (
      <Stack  display="flex" >
-       <Button size="small" sx={{ fontSize: "10px", margin: "5px", backgroundColor: selectedLang("en"), color: "inherit" }} onClick={() => changeLanguage("en")}>
-         En
-       </Button>
+       <ImprovedButton
+         sx={styles(selectedLang("en"))}
+         onClick={() => changeLanguage("en")}
+         text="En"/>
        <Divider  variant="middle" color="white" />
-       <Button size="small" sx={{ fontSize: "10px", margin: "5px", backgroundColor: selectedLang("uk"), color: "inherit" }}  onClick={() => changeLanguage("uk")}>
-         Укр
-       </Button>
+       <ImprovedButton
+         sx={styles(selectedLang("uk"))}
+         onClick={() => changeLanguage("uk")}
+         text="Укр"/>
      </Stack>
   );
 }

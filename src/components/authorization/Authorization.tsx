@@ -2,32 +2,19 @@
 import * as React from 'react';
 
 // MUI
-import { Button, TextField, Box, Modal} from '@mui/material';
+import { TextField, Box, Modal} from '@mui/material';
 
 // i18n
 import { useTranslation } from "react-i18next";
 
 // Common
 import { AppContext } from "../../App";
-
-export const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    padding: 4,
-};
-
-interface ILocalStorageData {
-  username: string,
-  password: string
-}
+import {ImprovedButton} from "../Button/Button";
+import { styles } from './AuthorizationStyle';
+import { ILocalStorageData } from "../../types/types";
 
 
-export function Authorization(): React.ReactElement {
+export const Authorization: React.FC =() => {
   const { t } = useTranslation();
   const { open, toggleMenu } = React.useContext(AppContext);
 
@@ -61,9 +48,9 @@ export function Authorization(): React.ReactElement {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} >
+        <Box sx={styles.wrapper} >
           <form onSubmit={handleSubmit}>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            <Box sx={styles.content}>
               <Box>
                 <TextField
                   label={t("placeholders.login")}
@@ -75,7 +62,7 @@ export function Authorization(): React.ReactElement {
                   onChange={handleUsernameChange}
                 />
               </Box>
-              <Box sx={{alignItems: "baseline"}}>
+              <Box>
                 <TextField
                   label={t("placeholders.password")}
                   size="small"
@@ -86,7 +73,7 @@ export function Authorization(): React.ReactElement {
                   onChange={handlePasswordChange}
                 />
               </Box>
-              <Button variant="contained" type="submit">{t("buttons.signin")}</Button>
+              <ImprovedButton text={t("buttons.signin")}/>
             </Box>
           </form>
         </Box>

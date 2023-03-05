@@ -8,9 +8,12 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 // i18n
 import { useTranslation } from "react-i18next";
 
+// Common
+import { styles } from "./NonAuthStyle";
+
 type ClearTimer = () => void;
 
-export const NonAuthCard = (): React.ReactElement => {
+export const NonAuth: React.FC = () => {
   const { t } = useTranslation();
   const [ time, setTime ] = React.useState<number>(5);
   const navigate = useNavigate();
@@ -30,23 +33,21 @@ export const NonAuthCard = (): React.ReactElement => {
   }, [time, navigate]);
 
   return (
-    <div>
-      <Card sx={{ display: "inline-block" }}>
-        <CardContent sx={{ display: "flex", flexDirection: "column" }}>
-          <Typography>
-            {t("phrases.redirecting")}
+    <Card >
+      <CardContent sx={styles.wrapper}>
+        <Typography sx={styles.text}>
+          {t("phrases.redirecting")}
+        </Typography>
+        <Box sx={styles.lowerText}>
+          <Typography sx={styles.text} >
+            {t("phrases.redirectingTimer")}
           </Typography>
-          <Box sx={{ display: "flex", gap: "10px", alignItems: "baseline" }}>
-            <Typography >
-              {t("phrases.redirectingTimer")}
-            </Typography>
-            <Typography sx={{ fontSize: "35px" }}>
-               {time}
-            </Typography>
-          </Box>
-        </CardContent>
-      </Card>
-    </div>
+          <Typography sx={styles.timerText}>
+            {time}
+          </Typography>
+        </Box>
+      </CardContent>
+    </Card>
   )
 }
 

@@ -4,16 +4,9 @@ import React from "react"
 // Common
 import { Header } from "../../components/header/Header";
 import { AuthCard } from "../../components/authCard/AuthCard";
-import { NonAuthCard } from "../../components/nonAuthCard/NonAuthCard";
+import { NonAuth } from "../../components/nonAuth/NonAuth";
+import { styles } from "./ProfileStyles";
 
-const style = {
-  display: "flex",
-  position: "absolute" as "absolute",
-  left: "50%",
-  margin: "0 auto",
-  top: "50%",
-  transform: "translate(-50%, -50%)"
-}
 
 
 export const Profile = (): React.ReactElement => {
@@ -22,12 +15,12 @@ export const Profile = (): React.ReactElement => {
     ?
     <AuthCard/>
     :
-    <NonAuthCard/>;
+    <NonAuth/>;
 
   return (
     <div >
       <Header/>
-        <div style={style}>
+        <div style={styles}>
           {showProfile}
         </div>
     </div>
