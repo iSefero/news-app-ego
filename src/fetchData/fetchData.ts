@@ -9,14 +9,13 @@ import { setAllDataLoaded, setLoading, setMorePosts, setPosts } from "../redux/s
 const url = 'https://newsapi.org/v2/top-headlines?' +
             'sources=bbc-news&' +
             'pageSize=3&page=';
-const apiKey = '&apiKey=435edbd4e301427496c72d0d43703ff2';
+const apiKey = process.env.REACT_APP_NEWS_API;
 
 export const fetchData = async (dispatch: React.Dispatch<{}>) => {
   dispatch(setLoading(true));
   try {
     const response = await axios.get(`${url}${1}${apiKey}`);
     (dispatch(setPosts(response.data.articles)));
-    console.log(response.data)
   } catch (error) {
     dispatch(setLoading(false));
     alert("Помилка під час запиту даних");

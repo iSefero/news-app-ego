@@ -27,8 +27,6 @@ export const News: React.FC = () => {
   const [visiblePosts, setVisiblePosts] = React.useState(posts);
   const [curPage, setCurPage] = React.useState<number>(2);
 
-  console.log(visiblePosts)
-
   React.useEffect((): void => {
     dispatch(setLoading(false))
     fetchData(dispatch);

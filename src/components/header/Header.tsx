@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { ChangeLangButton } from "../changeLangButton/ChangeLangButton";
 import { AppContext } from "../../App";
 import { Authorization } from "../authorization/Authorization";
-import flag from "../../assets/image/flag.png"
+import flag from "../../assets/images/flag.png"
 import { ImprovedButton } from "../Button/Button";
 import { linkPagesStyle, styles } from './HeaderStyle';
 

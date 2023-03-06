@@ -4,7 +4,7 @@ import React from "react"
 // Common
 import { Header } from "../../components/header/Header";
 import { Box, Divider, Typography } from "@mui/material";
-import ukraine from "../../assets/image/map.jpg"
+import ukraine from "../../assets/images/map.jpg"
 import { styles } from "./MainStyle";
 
 
