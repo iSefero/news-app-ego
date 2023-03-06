@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/news-app-ego/static/js/main.6d4bf9a9.js",
+    "main.js": "/news-app-ego/static/js/main.9a55f80c.js",
     "static/media/PlayfairDisplay-Medium.ttf": "/news-app-ego/static/media/PlayfairDisplay-Medium.d8afa483b200cadcda26.ttf",
     "static/media/PlayfairDisplay-ExtraBold.ttf": "/news-app-ego/static/media/PlayfairDisplay-ExtraBold.18a9cdf91bf509de5642.ttf",
     "static/media/PlayfairDisplay-Regular.ttf": "/news-app-ego/static/media/PlayfairDisplay-Regular.27705d9c43e8c36b1abd.ttf",
@@ -8,9 +8,9 @@
     "static/media/flag.png": "/news-app-ego/static/media/flag.d438fcfead828ce0e701.png",
     "index.html": "/news-app-ego/index.html",
     "static/media/getFetch.cjs": "/news-app-ego/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.6d4bf9a9.js.map": "/news-app-ego/static/js/main.6d4bf9a9.js.map"
+    "main.9a55f80c.js.map": "/news-app-ego/static/js/main.9a55f80c.js.map"
   },
   "entrypoints": [
-    "static/js/main.6d4bf9a9.js"
+    "static/js/main.9a55f80c.js"
   ]
 }
